@@ -95,7 +95,7 @@ drawImages = (imageObj) ->
       unscramble _.without(unsorted,next),sorted.concat([next]),depth
     return
     
-  unscramble(strips,[],1)
+  unscramble(strips,[],0)
   console.log strip_difference[19][17]
   console.log strip_difference[9][8]
   
