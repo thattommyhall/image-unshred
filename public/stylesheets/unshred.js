@@ -29,7 +29,7 @@ drawImages = function(imageObj) {
     one = getPixel(x1, y1);
     two = getPixel(x2, y2);
     for (i = 0; i <= 2; i++) {
-      if (one[i] - two[i] > 30) {
+      if (one[i] - two[i] > 100) {
         return 1;
       }
     }
