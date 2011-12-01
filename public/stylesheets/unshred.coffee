@@ -25,12 +25,12 @@ drawImages = (imageObj) ->
     total = 0
     one = getPixel(x1,y1)
     two = getPixel(x2,y2)
-    for i in [0..2]
+    for i in [0..3]
       return 1 if one[i]-two[i] > 100
     0
     # Original difference using Euclidian distance
-    # for i in [0..2]
-    #   total += Math.pow((one[i]-two[i]),2)
+    # for i in [0..3]
+    #   total += Math.sqrt(Math.pow((one[i]-two[i]),2))
     # total
     
    
