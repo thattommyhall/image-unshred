@@ -26,15 +26,16 @@ drawImages = (imageObj) ->
     one = getPixel(x1,y1)
     two = getPixel(x2,y2)
 
+    ## New 'heuristic' difference
     for i in [0..3]
       return 1 if one[i]-two[i] > 100
     0
 
     ## Original difference using Euclidian distance
+    ## (reinvents CIE76)
     # for i in [0..3]
     #   total += Math.sqrt(Math.pow((one[i]-two[i]),2))
     # total
-
 
   column_difference = (x1,x2) ->
     total = 0
@@ -75,9 +76,13 @@ drawImages = (imageObj) ->
 
   least_difference = Number.MAX_VALUE
 
+  now = -> (new Date()).getTime()
+
+  call_count = 0
+  start = now()
+
   unscramble = (unsorted,sorted,depth) ->
-    # console.log unsorted,sorted
-    return if sorted.length > 20
+    call_count++
     if unsorted.length is 0
       td = total_difference(sorted)
       if td < least_difference
@@ -94,4 +99,6 @@ drawImages = (imageObj) ->
     return
 
   unscramble(strips,[],0)
-
+  end = now()
+  took = (end-start)/1000
+  console.log "#{call_count} took #{took}s"

@@ -11,7 +11,7 @@
   };
 
   drawImages = function(imageObj) {
-    var STRIP_HEIGHT, STRIP_WIDTH, column_difference, data, draw, draw_from_to, getPixel, imageData, least_difference, left_edge, ordered_neighbors, pixel_difference, right_edge, shredded, shredded_context, strip, strip1, strip2, strip_difference, strips, total_difference, unscramble, unshredded, unshredded_context;
+    var STRIP_HEIGHT, STRIP_WIDTH, call_count, column_difference, data, draw, draw_from_to, end, getPixel, imageData, least_difference, left_edge, now, ordered_neighbors, pixel_difference, right_edge, shredded, shredded_context, start, strip, strip1, strip2, strip_difference, strips, took, total_difference, unscramble, unshredded, unshredded_context;
     shredded = document.getElementById("shredded");
     shredded_context = shredded.getContext("2d");
     shredded_context.drawImage(imageObj, 0, 0);
@@ -100,9 +100,14 @@
       return _results;
     };
     least_difference = Number.MAX_VALUE;
+    now = function() {
+      return (new Date()).getTime();
+    };
+    call_count = 0;
+    start = now();
     unscramble = function(unsorted, sorted, depth) {
       var next, strip, td, _i, _j, _len, _len2, _ref;
-      if (sorted.length > 20) return;
+      call_count++;
       if (unsorted.length === 0) {
         td = total_difference(sorted);
         if (td < least_difference) {
@@ -125,7 +130,10 @@
         unscramble(_.without(unsorted, next), sorted.concat([next]), depth);
       }
     };
-    return unscramble(strips, [], 0);
+    unscramble(strips, [], 0);
+    end = now();
+    took = (end - start) / 1000;
+    return console.log("" + call_count + " took " + took + "s");
   };
 
 }).call(this);
