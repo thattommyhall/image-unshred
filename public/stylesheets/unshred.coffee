@@ -2,7 +2,7 @@ window.onload = ->
   imageObj = new Image()
   imageObj.src = "images/TokyoPanoramaShredded.png"
   imageObj.onload = ->
-      drawImages(this)
+    drawImages(this)
 
 drawImages = (imageObj) ->
   shredded = document.getElementById("shredded")
